@@ -1,0 +1,55 @@
+{
+	"name": "tatter/stripe",
+	"description": "Stripe SDK integration for CodeIgniter 4",
+	"keywords": [
+		"codeigniter",
+		"codeigniter4",
+		"stripe",
+		"stripejs",
+		"sdk",
+		"online",
+		"payments"
+	],
+	"homepage": "https://github.com/tattersoftware/codeigniter4-stripe",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Matthew Gatner",
+			"email": "mgatner@tattersoftware.com",
+			"homepage": "https://tattersoftware.com",
+			"role": "Developer"
+		}
+	],
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/codeigniter4/CodeIgniter4"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {
+		"php" : "^7.2",
+		"stripe/stripe-php": "^7.14"
+	},
+	"require-dev": {
+		"phpunit/phpunit" : "^7.0",
+		"mockery/mockery": "^1.0",
+		"codeigniter4/codeigniter4": "dev-develop"
+	},
+	"autoload": {
+		"psr-4": {
+			"Tatter\\Stripe\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"ModuleTests\\Support\\": "tests/_support"
+		}
+	},
+	"scripts": {
+		"test": "phpunit",
+		"post-update-cmd": [
+			"composer dump-autoload"
+		]
+	}
+}
