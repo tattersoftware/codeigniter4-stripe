@@ -54,56 +54,14 @@ class Stripe
 	}
 
 	/**
-	 * Get a payment method.
-	 * Example return:
+	 * Get a payment method. See docs for example return object:
+	 * https://stripe.com/docs/api/payment_methods
 	 *
-	 *	"id": "pm_1FqQcsK94IKEAfkDkDtV0aGcC",
-	 *	"object": "payment_method",
-	 *	"billing_details": {
-	 *		"address": {
-	 *			"city": null,
-	 *			"country": null,
-	 *			"line1": null,
-	 *			"line2": null,
-	 *			"postal_code": "44444",
-	 *			"state": null
-	 *		},
-	 *		"email": "jillian@example.com",
-	 *		"name": null,
-	 *		"phone": null
-	 *	},
-	 *	"card": {
-	 *		"brand": "visa",
-	 *		"checks": {
-	 *			"address_line1_check": null,
-	 *			"address_postal_code_check": "pass",
-	 *			"cvc_check": "pass"
-	 *		},
-	 *		"country": "US",
-	 *		"exp_month": 12,
-	 *		"exp_year": 2022,
-	 *		"fingerprint": "bHCf4XCyh1gChedJ",
-	 *		"funding": "credit",
-	 *		"generated_from": null,
-	 *		"last4": "4242",
-	 *		"three_d_secure_usage": {
-	 *			"supported": true
-	 *		},
-	 *		"wallet": null
-	 *	},
-	 *	"created": 1576529830,
-	 *	"customer": "cus_G7GhvT4cqREHxG",
-	 *	"livemode": false,
-	 *	"metadata": [],
-	 *	"type": "card"
-	 *
-	 * @return object|null  Payment method objects
+	 * @return Stripe\PaymentMethod|null  The payment method object
 	 */
 	public function getMethod(string $methodId)
 	{
-		$response = \Stripe\PaymentMethod::retrieve($methodId);
-
-		return $response->data ?? null;
+		return \Stripe\PaymentMethod::retrieve($methodId) ?? null;
 	}
 
 	/**
