@@ -57,6 +57,8 @@ class Stripe
 	 * Get a payment method. See docs for example return object:
 	 * https://stripe.com/docs/api/payment_methods
 	 *
+	 * @param string $methodId  The Stripe payment method ID
+	 *
 	 * @return Stripe\PaymentMethod|null  The payment method object
 	 */
 	public function getMethod(string $methodId)
@@ -86,8 +88,6 @@ class Stripe
 
 	/**
 	 * Initialize a setup intent.
-	 *
-	 * @param int  $userId 
 	 *
 	 * @return $this
 	 */
