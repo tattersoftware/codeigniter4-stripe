@@ -13,7 +13,7 @@ class Services extends BaseService
 	 *
 	 * @return \Tatter\Stripe\Stripe
 	 */
-	public static function stripe($customerId = null, bool $getShared = true): Firebase
+	public static function stripe($customerId = null, bool $getShared = true): Stripe
 	{
 		if ($getShared)
 		{
