@@ -7,12 +7,21 @@
  */
 class Stripe
 {
+	const LIBRARY_VERSION = '1.0.1';
+
 	/**
 	 * The customer to act upon.
 	 *
 	 * @var string|null
 	 */
 	protected $customerId;
+
+	/**
+	 * Error messages from the last call
+	 *
+	 * @var array
+	 */
+	protected $errors = [];
 	
 	/**
 	 * Store an initial customer ID.
@@ -27,8 +36,22 @@ class Stripe
 
 		// Initialize the API
 		\Stripe\Stripe::setApiKey(env('stripe.secret'));
+		\Stripe\Stripe::setAppInfo('Tatter\Stripe', self::LIBRARY_VERSION, 'https://github.com/tattersoftware/codeigniter4-stripe');
 	}
-	
+
+	/**
+	 * Get and clear any error messsages
+	 *
+	 * @return array  Any error messages from the last call
+	 */
+	public function getErrors(): array
+	{
+		$errors       = $this->errors;
+		$this->errors = [];
+
+		return $errors;
+	}
+
 	/**
 	 * Returns the current customer ID.
 	 *
@@ -52,6 +75,56 @@ class Stripe
 
 		return $this;
 	}
+	
+	/**
+	 * Returns the current customer, or one specified by its ID.
+	 * https://stripe.com/docs/api/customers/retrieve?lang=php
+	 *
+	 * @param data $data  Optional customer data 
+	 *
+	 * @return string  ID of the new customer
+	 */
+	public function getCustomer(string $customerId = null): \Stripe\Customer
+	{
+		return \Stripe\Customer::retrieve($customerId ?? $this->customerId);
+	}
+
+	/**
+	 * Create a new customer and set it as the current.
+	 * https://stripe.com/docs/api/customers/create?lang=php
+	 *
+	 * @param data $data  Optional customer data 
+	 *
+	 * @return string  ID of the new customer
+	 */
+	public function createCustomer(array $data = []): string
+	{
+		$response = \Stripe\Customer::create($data);
+
+		$this->customerId = $response->id;
+
+		return $this->customerId;
+	}
+
+	/**
+	 * Delete a customer by its ID.
+	 * https://stripe.com/docs/api/customers/remove?lang=php
+	 *
+	 * @param string $customerId
+	 *
+	 * @return bool
+	 */
+	public function deleteCustomer(array $data = []): string
+	{
+		if ($customer = $this->getCustomer($customerId))
+		{
+			$customer->delete();
+
+			return $customer->deleted;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Get a payment method. See docs for example return object:
@@ -63,7 +136,17 @@ class Stripe
 	 */
 	public function getMethod(string $methodId)
 	{
-		return \Stripe\PaymentMethod::retrieve($methodId) ?? null;
+		try
+		{
+			$method = \Stripe\PaymentMethod::retrieve($methodId);
+		}
+		catch (\Stripe\Exception\InvalidRequestException $e)
+		{
+			 $this->errors[] = $e->getError()->message;
+			 return null;
+		}
+
+		return $method;
 	}
 
 	/**
