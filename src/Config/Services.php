@@ -1,25 +1,35 @@
 <?php namespace Tatter\Stripe\Config;
 
 use CodeIgniter\Config\BaseService;
-use Tatter\Stripe\Stripe;
+use Stripe\StripeClient;
 
 class Services extends BaseService
 {
 	/**
-	 * Returns an instance of the Stripe SDK wrapper class
+	 * Returns an initialized Stripe client
 	 *
-	 * @param mixed    $customerId  Initial customer ID to act as
+	 * @param Tatter\Stripe\Config\Stripe $config  Configuration settings to pass to setAppInfo
 	 * @param boolean  $getShared
 	 *
-	 * @return \Tatter\Stripe\Stripe
+	 * @return Stripe\StripeClient
 	 */
-	public static function stripe($customerId = null, bool $getShared = true): Stripe
+	public static function stripe(Stripe $config = null, bool $getShared = true): StripeClient
 	{
 		if ($getShared)
 		{
-			return static::getSharedInstance('stripe', $customerId);
+			return static::getSharedInstance('stripe', $config);
 		}
 
-		return new Stripe($customerId);
+		if (is_null($config))
+		{
+			$config = config('Stripe');
+		}
+
+		// Initialize the API
+		\Stripe\Stripe::setApiKey($config->apiKey);
+		\Stripe\Stripe::setAppInfo($config->appName, $config->appVersion, $config->appUrl, $config->partnerID);
+		\Stripe\Stripe::setApiVersion('2017-06-05');
+
+		return new StripeClient();
 	}
 }
