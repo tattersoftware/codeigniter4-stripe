@@ -26,10 +26,10 @@ class Services extends BaseService
 		}
 
 		// Initialize the API
-		\Stripe\Stripe::setApiKey($config->apiSecret);
+		\Stripe\Stripe::setApiKey(env('stripe.apiSecret'));
 		\Stripe\Stripe::setAppInfo($config->appName, $config->appVersion, $config->appUrl, $config->partnerID);
 		\Stripe\Stripe::setApiVersion('2017-06-05');
 
-		return new StripeClient($config->apiSecret);
+		return new StripeClient(env('stripe.apiSecret'));
 	}
 }
