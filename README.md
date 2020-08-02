@@ -4,7 +4,7 @@ Stripe SDK integration for CodeIgniter 4
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/stripe`
-2. Set the environment keys: **.env** > `stripe.apiKey` and `stripe.secret`
+2. Set the environment keys: **.env** > `stripe.apiKey` and `stripe.apiSecret`
 3. Load the service: `$stripe = service('stripe');`
 
 ## Description
@@ -12,7 +12,7 @@ Stripe SDK integration for CodeIgniter 4
 This is a CodeIgniter 4 integration of the Stripe PHP SDK
 
 * [Documentation](https://stripe.com/docs)
-* [API Reference](https://stripe.com/docs/api)
+* [API Reference](https://stripe.com/docs/api?lang=php)
 * [GitHub repository](https://github.com/stripe/stripe-php)
 
 ## Installation
@@ -26,7 +26,12 @@ Or, install manually by downloading the source files and adding the directory to
 
 ## Configuration
 
-Edit **.env** in your project root and add your Stripe credentials from the
+The library's default behavior can be altered by extending its config file. Copy
+**examples/Stripe.php** to **app/Config/** and follow the instructions
+in the comments. If no config file is found in **app/Config** then the library will use its own.
+
+You need to set at least your `apiSecret`. It is highly recommended you do this in your **.env**
+file in your project root. API keys and secrets are available from the
 [Stripe Dashboard](https://dashboard.stripe.com/account/apikeys). E.g.:
 
 ```
@@ -35,7 +40,7 @@ Edit **.env** in your project root and add your Stripe credentials from the
 #--------------------------------------------------------------------
 
 stripe.apiKey = pk_test_6pRNASCoBOKtIshFeQd4XMUh
-stripe.secret = sk_test_BQokikJOvBiI2HlWgH4olfQ2
+stripe.apiSecret = sk_test_BQokikJOvBiI2HlWgH4olfQ2
 ```
 
 > *WARNING* Make sure you never include credentials in your repository!
@@ -46,3 +51,7 @@ Load the Stripe service:
 
 	$stripe = service('stripe');
 
+At this point you have a working `StripeClient` and can use any of the methods described
+in the [Stripe API Docs](https://stripe.com/docs/api?lang=php). Note that API endpoints
+are version-specific. See **Configuration** above on how to use the example config file to
+override the module default if you want to set a specific version.
