@@ -12,14 +12,6 @@ class Stripe extends BaseConfig
 	public $apiKey = '';
 
 	/**
-	 * Your API secret
-	 * Probably want to set this is .env instead.
-	 *
-	 * @var string
-	 */
-	public $apiSecret = '';
-
-	/**
 	 * Which version of Stripe's API to use.
 	 * Make sure you are familair with Stripe's per-user API versioning before changing this.
 	 * https://stripe.com/docs/api/versioning

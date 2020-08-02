@@ -32,8 +32,8 @@ The library's default behavior can be altered by extending its config file. Copy
 **examples/Stripe.php** to **app/Config/** and follow the instructions
 in the comments. If no config file is found in **app/Config** then the library will use its own.
 
-You need to set at least your `apiSecret`. It is highly recommended you do this in your **.env**
-file in your project root. API keys and secrets are available from the
+In addition to the configuration you *must* set your `apiSecret` in your **.env** file
+in your project root. API keys and secrets are available from the
 [Stripe Dashboard](https://dashboard.stripe.com/account/apikeys). E.g.:
 
 ```
