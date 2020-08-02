@@ -5,12 +5,19 @@ use CodeIgniter\Config\BaseConfig;
 class Stripe extends BaseConfig
 {
 	/**
-	 * Your super secret API key
-	 * Probably want to set this is .env instead.
+	 * Your API key
 	 *
 	 * @var string
 	 */
 	public $apiKey = '';
+
+	/**
+	 * Your API secret
+	 * Probably want to set this is .env instead.
+	 *
+	 * @var string
+	 */
+	public $apiSecret = '';
 
 	/**
 	 * Which version of Stripe's API to use.

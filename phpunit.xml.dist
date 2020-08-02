@@ -55,5 +55,8 @@
 <!--	<env name="database.tests.DBPrefix" value="tests_"/>	 -->
 		<env name="database.tests.database" value=":memory:"/>
 		<env name="database.tests.DBDriver" value="SQLite3"/>
+
+<!--	<env name="stripe.apiKey" value="pk_test_XXXXXXX"/> -->
+<!--	<env name="stripe.apiSecret" value="sk_test_XXXXXXX"/> -->
 	</php>
 </phpunit>
