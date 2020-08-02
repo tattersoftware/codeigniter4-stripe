@@ -1,6 +1,8 @@
 # Tatter\Stripe
 Stripe SDK integration for CodeIgniter 4
 
+![PHPUnit](https://github.com/tattersoftware/codeigniter4-stripe/workflows/PHPUnit/badge.svg)
+
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/stripe`
