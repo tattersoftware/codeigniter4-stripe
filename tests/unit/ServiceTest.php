@@ -2,9 +2,11 @@
 
 use CodeIgniter\Test\CIUnitTestCase;
 use Stripe\Customer;
-use Stripe\StripeClient;
 
-class ServiceTest extends CIUnitTestCase
+/**
+ * @internal
+ */
+final class ServiceTest extends CIUnitTestCase
 {
 	public function testServiceReturnsClient()
 	{
@@ -23,4 +25,3 @@ class ServiceTest extends CIUnitTestCase
 		$this->assertInstanceOf(Customer::class, $customer);
 	}
 }
-
