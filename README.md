@@ -1,7 +1,10 @@
 # Tatter\Stripe
 Stripe SDK integration for CodeIgniter 4
 
-![PHPUnit](https://github.com/tattersoftware/codeigniter4-stripe/workflows/PHPUnit/badge.svg)
+[![](https://github.com/tattersoftware/codeigniter4-stripe/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-stripe/actions/workflows/test.yml)
+[![](https://github.com/tattersoftware/codeigniter4-stripe/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-stripe/actions/workflows/analyze.yml)
+[![](https://github.com/tattersoftware/codeigniter4-stripe/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-stripe/actions/workflows/inspect.yml)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-stripe/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-stripe?branch=develop)
 
 ## Quick Start
 
