@@ -1,56 +1,73 @@
 {
-	"name": "tatter/stripe",
-	"description": "Stripe SDK integration for CodeIgniter 4",
-	"keywords": [
-		"codeigniter",
-		"codeigniter4",
-		"stripe",
-		"stripejs",
-		"sdk",
-		"online",
-		"payments"
-	],
-	"homepage": "https://github.com/tattersoftware/codeigniter4-stripe",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Matthew Gatner",
-			"email": "mgatner@tattersoftware.com",
-			"homepage": "https://tattersoftware.com",
-			"role": "Developer"
-		}
-	],
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/codeigniter4/CodeIgniter4"
-		}
-	],
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"require": {
-		"php" : ">=7.2",
-		"stripe/stripe-php": "^7.14"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "8.5.*",
-		"fzaninotto/faker": "^1.9@dev",
-		"codeigniter4/codeigniter4": "dev-develop"
-	},
-	"autoload": {
-		"psr-4": {
-			"Tatter\\Stripe\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Support\\": "tests/_support"
-		}
-	},
-	"scripts": {
-		"test": "phpunit",
-		"post-update-cmd": [
-			"composer dump-autoload"
-		]
-	}
+    "name": "tatter/stripe",
+    "type": "library",
+    "description": "Stripe SDK integration for CodeIgniter 4",
+    "keywords": [
+        "codeigniter",
+        "codeigniter4",
+        "stripe",
+        "stripejs",
+        "sdk",
+        "online",
+        "payments"
+    ],
+    "homepage": "https://github.com/tattersoftware/codeigniter4-stripe",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Gatner",
+            "email": "mgatner@tattersoftware.com",
+            "homepage": "https://tattersoftware.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "stripe/stripe-php": "^7.14"
+    },
+    "require-dev": {
+        "codeigniter4/codeigniter4": "dev-develop",
+        "tatter/tools": "^1.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tatter\\Stripe\\": "src"
+        },
+        "exclude-from-classmap": [
+            "**/Database/Migrations/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/codeigniter4/CodeIgniter4"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-update-cmd": [
+            "composer dump-autoload"
+        ],
+        "analyze": "phpstan analyze",
+        "ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "@deduplicate",
+            "@analyze",
+            "@test",
+            "@mutate",
+            "@inspect",
+            "@style"
+        ],
+        "deduplicate": "phpcpd app/ src/",
+        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
+        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+        "style": "php-cs-fixer fix --verbose --ansi --using-cache=no",
+        "test": "phpunit"
+    }
 }
