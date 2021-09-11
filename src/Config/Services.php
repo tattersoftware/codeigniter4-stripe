@@ -1,4 +1,6 @@
-<?php namespace Tatter\Stripe\Config;
+<?php
+
+namespace Tatter\Stripe\Config;
 
 use CodeIgniter\Config\BaseService;
 use Stripe\Stripe;
@@ -10,19 +12,16 @@ class Services extends BaseService
 	/**
 	 * Returns an initialized Stripe client
 	 *
-	 * @param StripeConfig $config  Configuration settings to pass to setAppInfo
-	 * @param boolean  $getShared
-	 *
-	 * @return StripeClient
+	 * @param StripeConfig $config Configuration settings to pass to setAppInfo
 	 */
-	public static function stripe(StripeConfig $config = null, bool $getShared = true): StripeClient
+	public static function stripe(?StripeConfig $config = null, bool $getShared = true): StripeClient
 	{
 		if ($getShared)
 		{
 			return static::getSharedInstance('stripe', $config);
 		}
 
-		if (is_null($config))
+		if (null === $config)
 		{
 			$config = config('Stripe');
 		}

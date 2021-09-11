@@ -1,4 +1,6 @@
-<?php namespace Tatter\Stripe\Config;
+<?php
+
+namespace Tatter\Stripe\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
