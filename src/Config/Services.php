@@ -1,19 +1,21 @@
 <?php namespace Tatter\Stripe\Config;
 
 use CodeIgniter\Config\BaseService;
+use Stripe\Stripe;
 use Stripe\StripeClient;
+use Tatter\Stripe\Config\Stripe as StripeConfig;
 
 class Services extends BaseService
 {
 	/**
 	 * Returns an initialized Stripe client
 	 *
-	 * @param Tatter\Stripe\Config\Stripe $config  Configuration settings to pass to setAppInfo
+	 * @param StripeConfig $config  Configuration settings to pass to setAppInfo
 	 * @param boolean  $getShared
 	 *
-	 * @return Stripe\StripeClient
+	 * @return StripeClient
 	 */
-	public static function stripe(Stripe $config = null, bool $getShared = true): StripeClient
+	public static function stripe(StripeConfig $config = null, bool $getShared = true): StripeClient
 	{
 		if ($getShared)
 		{
@@ -26,9 +28,9 @@ class Services extends BaseService
 		}
 
 		// Initialize the API
-		\Stripe\Stripe::setApiKey(env('stripe.apiSecret'));
-		\Stripe\Stripe::setAppInfo($config->appName, $config->appVersion, $config->appUrl, $config->partnerID);
-		\Stripe\Stripe::setApiVersion($config->apiVersion);
+		Stripe::setApiKey(env('stripe.apiSecret'));
+		Stripe::setAppInfo($config->appName, $config->appVersion, $config->appUrl, $config->partnerID);
+		Stripe::setApiVersion($config->apiVersion);
 
 		return new StripeClient(env('stripe.apiSecret'));
 	}
