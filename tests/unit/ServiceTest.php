@@ -8,20 +8,20 @@ use Stripe\Customer;
  */
 final class ServiceTest extends CIUnitTestCase
 {
-	public function testServiceReturnsClient()
-	{
-		$result = service('stripe');
+    public function testServiceReturnsClient()
+    {
+        $result = service('stripe');
 
-		$this->assertInstanceOf('Stripe\StripeClient', $result);
-	}
+        $this->assertInstanceOf('Stripe\StripeClient', $result);
+    }
 
-	public function testServiceClientWorks()
-	{
-		$stripe = service('stripe');
+    public function testServiceClientWorks()
+    {
+        $stripe = service('stripe');
 
-		$customer = $stripe->customers->create(['email' => 'bazinga@example.com']);
-		$stripe->customers->delete($customer->id);
+        $customer = $stripe->customers->create(['email' => 'bazinga@example.com']);
+        $stripe->customers->delete($customer->id);
 
-		$this->assertInstanceOf(Customer::class, $customer);
-	}
+        $this->assertInstanceOf(Customer::class, $customer);
+    }
 }
